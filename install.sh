@@ -2,6 +2,7 @@
 
 # I am constantly redoing this so I need to ensure zfs pool does not exist anymore according to zfs and I need to unmount all partitions
 umount -R /mnt
+umount -R /mnt/boot
 swapoff -a
 zpool destroy znix
 
