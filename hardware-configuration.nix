@@ -6,7 +6,7 @@
     initrd = {
       availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
       postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r znix/faketmpfsf@blank
+        zfs rollback -r znix/faketmpfs@blank
       '';
     };
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
