@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# I am constantly redoing this so I need to ensure zfs pool does not exist anymore according to zfs and I need to unmount all partitions
+umount -R /mnt
+swapoff -a
+zpool destroy znix
+
 echo "Wiping disk"
 wipefs -f /dev/sda && sleep 10
 
@@ -16,6 +21,7 @@ parted -a optimal -s /dev/sda \
 echo "Formatting partitions with filesystem"
 mkfs.fat -F32 -n BOOT /dev/sda1
 mkswap -L SWAP /dev/sda2
+swapon /dev/sda2
 zpool create -f \
 	-o ashift=12 \
 	-o autotrim=on \
@@ -32,7 +38,7 @@ zpool create -f \
 
 echo "Creating /"
 zfs create -o mountpoint=legacy znix/faketmpfs
-zfs create snapshot znix/faketmpfs@blank
+zfs snapshot znix/faketmpfs@blank
 mount -t zfs znix/faketmpfs /mnt
 
 echo "Mounting /boot (EFI partition)"
@@ -45,3 +51,6 @@ mount --mkdir -t zfs znix/nix /mnt/nix
 echo "Creating /tmp"
 zfs create -o mountpoint=legacy znix/tmp
 mount --mkdir -t zfs znix/tmp /mnt/tmp
+
+echo "Installing NixOS"
+nixos-install --no-root-password --flake .#failbox
