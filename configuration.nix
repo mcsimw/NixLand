@@ -6,6 +6,8 @@
       ./hardware-configuration.nix
     ];
 
+
+  services.zfs.autoScrub.enable = true;
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -14,6 +16,7 @@
   networking = {
     hostName = "failbox";
     firewall.enable = false;
+    hostId = "dc44142f";
   };
 
   time.timeZone = "Canada/Eastern";
@@ -36,8 +39,8 @@
     };
   };
 
+  programs.neovim.enable = true;
   environment.systemPackages = with pkgs; [
-    vim 
     wget
   ];
 
@@ -45,4 +48,3 @@
 
   system.stateVersion = "24.05";
 }
-

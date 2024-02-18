@@ -2,7 +2,6 @@
 
 {
 
-  services.zfs.autoscrub.enable = true;
   boot = {
     initrd = {
       availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
@@ -17,7 +16,7 @@
     "/" = {
       device = "znix/faketmpfs";
       fsType = "zfs";
-    x};
+    };
     "/boot" = {
       device = "/dev/sda1";
       fsType = "vfat";
