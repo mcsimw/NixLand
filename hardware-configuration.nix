@@ -18,6 +18,11 @@
       fsType = "zfs";
       neededForBoot = true;
     };
+    "/mnt/c" = {
+      device = "znix/c";
+      fsType = "zfs";
+      neededForBoot = true;
+    };
     "/boot" = {
       device = "/dev/sda1";
       fsType = "vfat";
