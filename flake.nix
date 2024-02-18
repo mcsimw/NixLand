@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, disko, ... }: {
     nixosConfigurations = {
       failbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -23,6 +27,12 @@
 	      users.mcsimw = import ./home.nix;
             };
 	  }
+	  disko.nixosModules.disko
+	  ./disko-config-nix
+	  {
+	    _module.args.disks = [ "/dev/sdb" ];
+	  }
+
         ];
       };
     };
