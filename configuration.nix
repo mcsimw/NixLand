@@ -62,8 +62,8 @@
       enable = true;
       extraRules = [{
         users = [ "mcsimw" ];
-	noPass = true;
-	keepEnv = true;
+        noPass = true;
+        keepEnv = true;
       }];
     };
   };
