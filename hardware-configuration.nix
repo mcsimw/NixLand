@@ -16,6 +16,7 @@
     "/" = {
       device = "znix/faketmpfs";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/boot" = {
       device = "/dev/sda1";
