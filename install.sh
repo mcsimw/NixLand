@@ -53,5 +53,10 @@ echo "Creating /tmp"
 zfs create -o mountpoint=legacy znix/tmp
 mount --mkdir -t zfs znix/tmp /mnt/tmp
 
+
+echo "Creating /mnt/c"
+zfs create -o mountpoint=legacy znix/c
+mount --mkdir -t zfs znix/tmp /mnt/mnt/c
+
 echo "Installing NixOS"
 nixos-install --no-root-password --flake .#failbox
