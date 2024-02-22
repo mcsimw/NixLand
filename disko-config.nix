@@ -1,7 +1,7 @@
 { disks ? [ "/dev/sdb" ], ... }: {
   disko.devices = {
     disk = {
-      x = {
+      lemon = {
         device = builtins.elemAt disks 0;
         content = {
           type = "gpt";
