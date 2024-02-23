@@ -1,23 +1,20 @@
 {
   disko.devices = {
     disk = {
-      sdb = {
+      sda = {
         type = "disk";
         device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
 	    BOOT = {
+              type = "EF00";
 	      size = "1G";
-	      type = "EF00";
-	      content = {
-	        type = "EF00";
-		content = {
-		  type = "filesystem";
-		  format = "vfat";
-		  mountpoint = "/boot";
-		};
-	      };
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+              };
 	    };
             OS = {
               size = "100%";
@@ -46,7 +43,6 @@
 	  mountpoint = "none";
 	  encryption = "aes-256-gcm";
 	  keyformat = "passphrase";
-	  keyformat = "passphrase";
 	  keylocation = "prompt";
         };
         datasets = {
@@ -71,7 +67,7 @@
             mountpoint = "/mnt/c";
           };
         };
-        postCreateHook = "zfs snapshot zos@faketmpfs@blank";
+        postCreateHook = "zfs snapshot zos/faketmpfs@blank";
       };
     };
   };
