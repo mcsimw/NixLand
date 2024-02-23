@@ -12,7 +12,7 @@
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 
-  fileSystem."/".neededForBoot = true;
+  fileSystems."/".neededForBoot = true;
 
   #fileSystems = {
   #  "/" = {
