@@ -11,9 +11,13 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, disko, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, disko, emacs-overlay, ... }: {
     nixosConfigurations = {
       failbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -26,13 +30,10 @@
 	      useUserPackages = true;
 	      users.mcsimw = import ./home.nix;
             };
+	    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 	  }
 	  disko.nixosModules.disko
 	  ./disko-config.nix
-	  {
-	    _module.args.disks = [ "/dev/sdb" ];
-	  }
-
         ];
       };
     };

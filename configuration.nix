@@ -10,8 +10,18 @@
 
   nix = {
     package = pkgs.nixUnstable;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="      
+      ];
+    };
   };
+
+  security.polkit.enable = true;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -44,6 +54,15 @@
     };
   };
 
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+
   programs = {
     neovim.enable = true;
     git.enable = true;
@@ -53,6 +72,7 @@
   environment.systemPackages = with pkgs; [
     parted
     wget
+    dwl bemenu foot
   ];
 
   services.openssh.enable = true;
@@ -69,5 +89,17 @@
     };
   };
 
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+    dejavu_fonts
+  ];
   system.stateVersion = "24.05";
 }
