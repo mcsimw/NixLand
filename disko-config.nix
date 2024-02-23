@@ -3,7 +3,7 @@
     disk = {
       sdb = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
