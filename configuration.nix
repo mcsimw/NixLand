@@ -6,7 +6,12 @@
       ./hardware-configuration.nix
     ];
 
-  services.zfs.autoScrub.enable = true;
+   services = {
+     zfs.autoScrub.enable = true;
+     openssh.enable = true;
+     dbus.enable = true;
+     earlyoom.enable = true;
+    };
 
   nix = {
     package = pkgs.nixUnstable;
@@ -20,8 +25,6 @@
       ];
     };
   };
-
-  security.polkit.enable = true;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -54,14 +57,12 @@
     };
   };
 
-  services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
 
   programs = {
     neovim.enable = true;
@@ -74,10 +75,9 @@
     wget
     dwl bemenu foot
   ];
-
-  services.openssh.enable = true;
   
   security = {
+    polkit.enable = true;
     sudo.enable = false;
     doas = {
       enable = true;
@@ -101,5 +101,6 @@
     proggyfonts
     dejavu_fonts
   ];
+
   system.stateVersion = "24.05";
 }
