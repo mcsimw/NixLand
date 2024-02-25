@@ -1,22 +1,23 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
+  imports = [
       ./hardware-configuration.nix
-    ];
+   ];
 
-   services = {
-     zfs.autoScrub.enable = true;
-     openssh.enable = true;
-     dbus.enable = true;
-     earlyoom.enable = true;
-    };
+  environment.persistence."/mnt/c/persistent" = {
+    hideMounts = true;
+  };
+  services = {
+    zfs.autoScrub.enable = true;
+    openssh.enable = true;
+    dbus.enable = true;
+    earlyoom.enable = true;
+   };
 
   nix = {
-    package = pkgs.nixUnstable;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
       substituters = [
         "https://nix-community.cachix.org"
       ];
@@ -65,7 +66,6 @@
   };
 
   programs = {
-    neovim.enable = true;
     git.enable = true;
     tmux.enable = true;
   };

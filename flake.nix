@@ -15,9 +15,16 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, disko, emacs-overlay, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, disko, emacs-overlay, impermanence, nixvim, ... }: {
     nixosConfigurations = {
       failbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -29,10 +36,15 @@
 	      useGlobalPkgs = true;
 	      useUserPackages = true;
 	      users.mcsimw = import ./home.nix;
+	      sharedModules = [
+		nixvim.homeManagerModules.nixvim
+	      ];
             };
-	    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+	    nixpkgs.overlays = [ emacs-overlay.overlay ];
 	  }
 	  disko.nixosModules.disko
+	  impermanence.nixosModules.impermanence
+#          nixvim.homeManagerModules.nixvim
 	  ./disko-config.nix
         ];
       };

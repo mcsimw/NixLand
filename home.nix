@@ -1,4 +1,4 @@
-{ configs, pkgs, ...}:
+{ configs, pkgs, nixvim, ...}:
 
 {
   home = {
@@ -16,14 +16,11 @@
     };
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk;
+      package = pkgs.emacs-git;
     };
-  };
-
-  services = {
-    emacs = {
+    nixvim = {
       enable = true;
-      package = pkgs.emacs-pgtk;
+      plugins.lualine.enable = true;
     };
   };
 }
