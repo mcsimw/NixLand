@@ -48,22 +48,22 @@
         datasets = {
           faketmpfs = {
             type = "zfs_fs";
-	    options.mountpoint = "legacy";
+#	    options.mountpoint = "legacy";
             mountpoint = "/";
           };
           nix = {
             type = "zfs_fs";
-            options.mountpoint = "legacy";
+#            options.mountpoint = "legacy";
             mountpoint = "/nix";
           };
           tmp = {
             type = "zfs_fs";
-            options.mountpoint = "legacy";
+#            options.mountpoint = "legacy";
             mountpoint = "/tmp";
           };
           c = {
             type = "zfs_fs";
-            options.mountpoint = "legacy";
+#            options.mountpoint = "legacy";
             mountpoint = "/mnt/c";
           };
         };

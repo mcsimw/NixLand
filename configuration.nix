@@ -100,6 +100,7 @@
     dina-font
     proggyfonts
     dejavu_fonts
+    spleen
   ];
 
   system.stateVersion = "24.05";
