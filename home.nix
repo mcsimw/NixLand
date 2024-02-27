@@ -14,13 +14,10 @@
       userName = "Maor Haimovitz";
       userEmail = "maor@mcsimw.com";
     };
+    neovim.enable = true;
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
-    };
-    nixvim = {
-      enable = true;
-      plugins.lualine.enable = true;
+      package = pkgs.emacs-pgtk;
     };
   };
 }
