@@ -16,6 +16,13 @@
                 mountpoint = "/boot";
               };
 	    };
+	    SWAP = {
+	      size = "4G";
+	      content = {
+		type = "swap";
+	        randomEncryption = true;
+	      };
+	    };
             OS = {
               size = "100%";
               content = {
@@ -48,22 +55,18 @@
         datasets = {
           faketmpfs = {
             type = "zfs_fs";
-#	    options.mountpoint = "legacy";
             mountpoint = "/";
           };
           nix = {
             type = "zfs_fs";
-#            options.mountpoint = "legacy";
             mountpoint = "/nix";
           };
           tmp = {
             type = "zfs_fs";
-#            options.mountpoint = "legacy";
             mountpoint = "/tmp";
           };
           c = {
             type = "zfs_fs";
-#            options.mountpoint = "legacy";
             mountpoint = "/mnt/c";
           };
         };
