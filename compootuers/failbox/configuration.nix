@@ -14,7 +14,7 @@
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
-    keyFile = "/home/mcsimw/.config/sops/age/keys.txt";
+    age.keyFile = "/home/mcsimw/.config/sops/age/keys.txt";
   };
   environment.persistence."/mnt/c/persistent" = { 
     hideMounts = true; 
