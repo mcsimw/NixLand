@@ -1,39 +1,44 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-      ./hardware-configuration.nix
-   ];
+  imports = [ ./hardware-configuration.nix ];
 
-  environment.persistence."/mnt/c/persistent" = {
-    hideMounts = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
   };
+
+  environment.persistence."/mnt/c/persistent" = { hideMounts = true; };
+
   services = {
     zfs.autoScrub.enable = true;
     openssh.enable = true;
     dbus.enable = true;
     earlyoom.enable = true;
-   };
+  };
 
-   zramSwap.enable = true;
+  zramSwap.enable = true;
 
-
-
+  nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
-      substituters = [
-        "https://nix-community.cachix.org"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://nix-community.cachix.org" ];
       trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="      
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
   };
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    tmp.cleanOnBoot = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   networking = {
@@ -49,7 +54,6 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
-
   users = {
     mutableUsers = false;
     users = {
@@ -74,12 +78,8 @@
     tmux.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    parted
-    wget
-    dwl bemenu foot
-  ];
-  
+  environment.systemPackages = with pkgs; [ parted wget dwl bemenu foot ];
+
   security = {
     polkit.enable = true;
     sudo.enable = false;
@@ -98,12 +98,8 @@
     noto-fonts-cjk
     noto-fonts-emoji
     liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
-    dejavu_fonts
+    corefonts
+    vistafonts
     spleen
   ];
 

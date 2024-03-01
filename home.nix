@@ -1,4 +1,4 @@
-{ configs, pkgs, nixvim, ...}:
+{ configs, pkgs, ... }:
 
 {
   home = {

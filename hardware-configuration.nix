@@ -4,7 +4,8 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
+      availableKernelModules =
+        [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
       systemd = {
         enable = true;
         services.rollback = {
@@ -13,22 +14,16 @@
             # "zfs.target"
             "initrd.target"
           ];
-          after = [
-            "zfs-import-zos.service"
-          ];
-          before = [
-            "sysroot.mount"
-          ];
-          path = with pkgs; [
-            zfs
-          ];
+          after = [ "zfs-import-zos.service" ];
+          before = [ "sysroot.mount" ];
+          path = with pkgs; [ zfs ];
           unitConfig.DefaultDependencies = "no";
           serviceConfig.Type = "oneshot";
           script = ''
             zfs rollback -r zos/faketmpfs@blank && echo "  >> >> rollback complete << <<"
           '';
-       };
-     };
+        };
+      };
     };
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   };

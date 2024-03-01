@@ -7,15 +7,15 @@
         content = {
           type = "gpt";
           partitions = {
-	    BOOT = {
+            BOOT = {
               type = "EF00";
-	      size = "1G";
+              size = "1G";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
               };
-	    };
+            };
             OS = {
               size = "100%";
               content = {
@@ -30,20 +30,20 @@
     zpool = {
       zos = {
         type = "zpool";
-	options = {
-	  autotrim = "on";
-	  ashift = "12";
-	};
+        options = {
+          autotrim = "on";
+          ashift = "12";
+        };
         rootFsOptions = {
           compression = "zstd";
-	  acltype= "posixacl";
-	  atime = "off";
-	  xattr = "sa";
-	  normalization = "formD";
-	  mountpoint = "none";
-	  encryption = "aes-256-gcm";
-	  keyformat = "passphrase";
-	  keylocation = "prompt";
+          acltype = "posixacl";
+          atime = "off";
+          xattr = "sa";
+          normalization = "formD";
+          mountpoint = "none";
+          encryption = "aes-256-gcm";
+          keyformat = "passphrase";
+          keylocation = "prompt";
         };
         datasets = {
           faketmpfs = {
