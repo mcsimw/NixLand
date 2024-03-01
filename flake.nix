@@ -47,7 +47,6 @@
               }
               disko.nixosModules.disko
               impermanence.nixosModules.impermanence
-              treefmt-nix.flakeModule
               ./compootuers/failbox/disko-config.nix
             ];
           };

@@ -4,9 +4,9 @@ For now this repository mainly stores NixOS configuration stuff for my various s
 
 ## Hosts
 
-Name                                            | Description
------------------------------------------------ | --------------
+Name                                             | Description
+------------------------------------------------ | --------------
 [failbox](./compootuers/failbox)                 | Virtual Machine ( VirtualBox Flavour )
 [eldritch](./compootuers/eldritch)               | Main Desktop
 [cacodaemoniacal](./compootuers/cacodaemoniacal) | Main Laptop
-[phantasmagoric](./compootuers/phobophobia)      | Home Server ( Dell Optiplex 320 )
+[phantasmagoric](./compootuers/phantasmagoric)   | Home Server ( Dell Optiplex 320 )
