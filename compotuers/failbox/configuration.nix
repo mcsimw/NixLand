@@ -76,6 +76,7 @@
   programs = {
     git.enable = true;
     tmux.enable = true;
+    steam.enable = true;
   };
 
   environment.systemPackages = with pkgs; [ parted wget dwl bemenu foot ];

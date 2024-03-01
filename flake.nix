@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,28 +16,41 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence = { url = "github:nix-community/impermanence"; };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, disko, emacs-overlay
-    , impermanence, ... }: {
-      nixosConfigurations = {
-        failbox = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.mcsimw = import ./home.nix;
-              };
-              nixpkgs.overlays = [ emacs-overlay.overlay ];
-            }
-            disko.nixosModules.disko
-            impermanence.nixosModules.impermanence
-            ./disko-config.nix
-          ];
+    , impermanence, treefmt-nix, systems, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      flake = {
+        nixosConfigurations = {
+          failbox = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./compotuers/failbox/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.mcsimw = import ./compotuers/failbox/home.nix;
+                };
+                nixpkgs.overlays = [ emacs-overlay.overlay ];
+              }
+              disko.nixosModules.disko
+              impermanence.nixosModules.impermanence
+              treefmt-nix.flakeModule
+              ./compotuers/failbox/disko-config.nix
+            ];
+          };
         };
       };
     };
