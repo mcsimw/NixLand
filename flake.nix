@@ -35,20 +35,20 @@
           failbox = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./compotuers/failbox/configuration.nix
+              ./compootuers/failbox/configuration.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users.mcsimw = import ./compotuers/failbox/home.nix;
+                  users.mcsimw = import ./compootuers/failbox/home.nix;
                 };
                 nixpkgs.overlays = [ emacs-overlay.overlay ];
               }
               disko.nixosModules.disko
               impermanence.nixosModules.impermanence
               treefmt-nix.flakeModule
-              ./compotuers/failbox/disko-config.nix
+              ./compootuers/failbox/disko-config.nix
             ];
           };
         };

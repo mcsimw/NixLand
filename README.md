@@ -6,7 +6,7 @@ For now this repository mainly stores NixOS configuration stuff for my various s
 
 Name                                            | Description
 ----------------------------------------------- | --------------
-[failbox](./compotuers/failbox)                 | Virtual Machine ( VirtualBox Flavour )
-[eldritch](./compotuers/eldritch)               | Main Desktop
-[cacodaemoniacal](./compotuers/cacodaemoniacal) | Main Laptop
-[phantasmagoric](./compotuers/phobophobia)      | Home Server ( Dell Optiplex 320 )
+[failbox](./compootuers/failbox)                 | Virtual Machine ( VirtualBox Flavour )
+[eldritch](./compootuers/eldritch)               | Main Desktop
+[cacodaemoniacal](./compootuers/cacodaemoniacal) | Main Laptop
+[phantasmagoric](./compootuers/phobophobia)      | Home Server ( Dell Optiplex 320 )
