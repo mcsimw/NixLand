@@ -69,8 +69,13 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      dwl = {
+        default = [ "wlr" "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+    };
   };
 
   programs = {
@@ -95,6 +100,7 @@
   };
 
   fonts.packages = with pkgs; [
+    emacs-all-the-icons-fonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
@@ -102,6 +108,7 @@
     corefonts
     vistafonts
     spleen
+    terminus_font
   ];
 
   system.stateVersion = "24.05";
