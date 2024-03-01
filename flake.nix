@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence = { url = "github:nix-community/impermanence"; };
+    sops-nix.url = "github:Mic92/sops-nix";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +28,7 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, disko, emacs-overlay
     , impermanence, treefmt-nix, systems, flake-parts, neovim-nightly-overlay
-    , ... }:
+    , sops-nix, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       flake = {
@@ -38,6 +39,7 @@
               ./compootuers/failbox/configuration.nix
               home-manager.nixosModules.home-manager
               {
+		programs.tmux.enable = true;
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
@@ -47,6 +49,7 @@
                   [ emacs-overlay.overlay neovim-nightly-overlay.overlay ];
               }
               disko.nixosModules.disko
+	      sops-nix.nixosModules.sops
               impermanence.nixosModules.impermanence
               ./compootuers/failbox/disko-config.nix
             ];

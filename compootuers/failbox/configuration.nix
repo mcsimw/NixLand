@@ -11,7 +11,21 @@
     jack.enable = true;
   };
 
-  environment.persistence."/mnt/c/persistent" = { hideMounts = true; };
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    keyFile = "/home/mcsimw/.config/sops/age/keys.txt";
+  };
+  environment.persistence."/mnt/c/persistent" = { 
+    hideMounts = true; 
+    users.mcsimw = {
+      directories = [
+        { directory = ".gnupg"; mode = "0700"; }
+        { directory = ".ssh"; mode = "0700"; }
+        ".config/sops/age"
+      ];
+    };
+  };
 
   services = {
     zfs.autoScrub.enable = true;
@@ -51,7 +65,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
+  #  font = "Lat2-Terminus16";
     keyMap = "us";
   };
   users = {
@@ -84,7 +98,7 @@
     steam.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ parted wget dwl bemenu foot ];
+  environment.systemPackages = with pkgs; [ age parted wget dwl bemenu foot ];
 
   security = {
     polkit.enable = true;
