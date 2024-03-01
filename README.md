@@ -4,9 +4,9 @@ For now this repository that stores mainly NixOS configuration stuff for my vari
 
 ## Hosts
 
-Name
----------------------------------
-[failbox](./compouters/failbox)
-[eldritch](./compouters/eldritch)
+Name                              | Description
+--------------------------------- | --------------
+[failbox](./compouters/failbox)   | Virtual Machine ( VirtualBox Flavour)
+[eldritch](./compouters/eldritch) | Main Desktop
                          
 
