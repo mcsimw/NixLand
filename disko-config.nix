@@ -16,13 +16,6 @@
                 mountpoint = "/boot";
               };
 	    };
-	    SWAP = {
-	      size = "4G";
-	      content = {
-		type = "swap";
-	        randomEncryption = true;
-	      };
-	    };
             OS = {
               size = "100%";
               content = {

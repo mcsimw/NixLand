@@ -15,6 +15,10 @@
     earlyoom.enable = true;
    };
 
+   zramSwap.enable = true;
+
+
+
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
