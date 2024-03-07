@@ -14,7 +14,7 @@
             # "zfs.target"
             "initrd.target"
           ];
-          after = [ "zfs-import-zos.service" ];
+          after = [ "zfs-import-nixos_pool.service" ];
           before = [ "sysroot.mount" ];
           path = with pkgs; [ zfs ];
           unitConfig.DefaultDependencies = "no";

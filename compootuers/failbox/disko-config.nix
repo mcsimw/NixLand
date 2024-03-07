@@ -18,7 +18,7 @@
               };
             };
             nixos = {
-	      label = "NIXOS_LABEL"
+	      label = "NIXOS_LABEL";
               size = "100%";
               content = {
                 type = "zfs";
