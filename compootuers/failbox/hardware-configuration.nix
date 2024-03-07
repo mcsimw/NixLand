@@ -33,6 +33,15 @@
     "/mnt/c".neededForBoot = true;
   };
 
+  systemd.services = {
+    fixprem = {
+      script = ''
+        chown mcsimw:users /mnt/c
+      '';
+      wantedBy = [ "multi-user.target" ];
+    };
+  };
+
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
