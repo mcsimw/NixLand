@@ -36,7 +36,7 @@
   systemd.services = {
     fixprem = {
       script = ''
-        chown mcsimw:users /mnt/c
+        chown 1000:100 /mnt/c
       '';
       wantedBy = [ "multi-user.target" ];
     };
