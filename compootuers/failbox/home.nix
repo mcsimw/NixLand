@@ -44,8 +44,8 @@
       userEmail = "maor@mcsimw.com";
     };
     emacs = {
-      enable = true;
-      package = pkgs.emacs-pgtk;
+      enable = false;
+      # package = pkgs.emacs-pgtk;
     };
   };
 }
