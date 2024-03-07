@@ -28,11 +28,22 @@
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 
-  fileSystems."/".neededForBoot = true;
+  fileSystems = {
+    "/".neededForBoot = true;
+    "/mnt/c".neededForBoot = true;
+  };
 
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.virtualbox.guest.enable = true;
   hardware.opengl.enable = true;
+
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    suspend-then-hibernate.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
 }
