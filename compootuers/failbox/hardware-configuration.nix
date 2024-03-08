@@ -33,15 +33,6 @@
     "/mnt/c".neededForBoot = true;
   };
 
-  systemd.services = {
-    fixprem = {
-      script = ''
-        chown 1000:100 /mnt/c
-      '';
-      wantedBy = [ "multi-user.target" ];
-    };
-  };
-
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
