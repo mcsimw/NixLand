@@ -16,7 +16,7 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/mcsimw/.config/sops/age/keys.txt";
   };
-  environment.persistence."/mnt/c/persistent" = { 
+  environment.persistence."/persist" = { 
     hideMounts = true; 
     users.mcsimw = {
       directories = [
