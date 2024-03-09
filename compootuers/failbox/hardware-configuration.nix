@@ -31,9 +31,19 @@
   fileSystems = {
     "/".neededForBoot = true;
     "/mnt/c".neededForBoot = true;
+    "/persist".neededForBoot = true;
   };
 
-  networking.useDHCP = lib.mkDefault true;
+  networking = {
+    useNetworkd = true;
+    useDHCP = true;
+  };
+
+  services = {
+    resolved.enable = true;
+    timesyncd.enable = true;
+  };
+
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.virtualbox.guest.enable = true;

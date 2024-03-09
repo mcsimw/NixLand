@@ -60,6 +60,10 @@
             type = "zfs_fs";
             mountpoint = "/tmp";
           };
+          persist_dataset = {
+            type = "zfs_fs";
+            mountpoint = "/persist";
+          };
           c_dataset = {
             type = "zfs_fs";
             mountpoint = "/mnt/c";
