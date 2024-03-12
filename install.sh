@@ -2,10 +2,6 @@
 
 set -e
 
-
-
-
-
 cat << Install
 This script will format whatever disk is specified in your nixos configuration as the operating system drive. The operating system drive has a standard layout which is defined in a disko template.
 
@@ -46,18 +42,20 @@ Partition 2:
 		c ( mounted at /mnt/c ) - a persistent dataset that will be used for storing things
 
 
-Install
 
+Install
 
 
 # Ask user for hostname
 while true; do
-	read -rp "Which host to install? (failbox / eldritch / cacodaemoniacal / phantasmagoric)"
-	case $host in
-		falibox|eldritch|cacodaemoniacal|phantasmagoric ) break;;
+	read -rp "Which host to install? (failbox / eldritch / cacodaemoniacal / phantasmagoric): " hostname
+	case $hostname in
+		failbox|eldritch|cacodaemoniacal|phantasmagoric ) break;;
 		* ) echo "Invalid host. Please select a valid host.";;
 	esac
 done
+
+
 
 
 # Not strictly neccessary but I like to format it my way
@@ -70,14 +68,14 @@ perform_formatting() {
 			# Add your formatting action for failbox here
 			for ((i = 1; i <= 7; i++)); do
 				echo "Attempt $i: Running wipefs -a on /dev/sda..."
-				wipefs -a /dev/nvme0n1
+				wipefs -a /dev/sda
 				if [ "$i" -lt 7 ]; then
 					echo "Waiting for 5 seconds before the next attempt..."
 					sleep 5
 				fi
 			done
 			echo "Formatting completed. Give me a min to do something :)"
-			sleep 60
+			sleep 5
 			;;
 		eldritch)
 			echo "Performing action for eldritch..."
@@ -113,8 +111,8 @@ perform_formatting() {
 
 perform_formatting "$hostname"
 
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$host/disko-config.nix"
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$hostname/disko-config.nix"
 
 sudo install -o 1000 -g 100 -d /mnt/persist/home/mcsimw && sudo chown -R 1000:100 /mnt/mnt/c
 
-sudo nixos-install --no-root-passwd --flake .#$host
+sudo nixos-install --no-root-passwd --flake .#$hostname

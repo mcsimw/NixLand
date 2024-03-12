@@ -20,7 +20,7 @@
           unitConfig.DefaultDependencies = "no";
           serviceConfig.Type = "oneshot";
           script = ''
-            zfs rollback -r nixos_pool/faketmpfs_dataset@blank_dataset && echo "  >> >> rollback complete << <<"
+            zfs rollback -r nixos/faketmpfs@blank && echo "  >> >> rollback complete << <<"
           '';
         };
       };

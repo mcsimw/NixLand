@@ -9,7 +9,7 @@
           partitions = {
             boot = {
               type = "EF00";
-	      label = "BOOT_LABEL";
+	      label = "BOOT";
               size = "1G";
               content = {
                 type = "filesystem";
@@ -18,11 +18,11 @@
               };
             };
             nixos = {
-	      label = "NIXOS_LABEL";
+	      label = "NIXOS";
               size = "100%";
               content = {
                 type = "zfs";
-                pool = "nixos_pool";
+                pool = "nixos";
               };
             };
           };
@@ -30,7 +30,7 @@
       };
     };
     zpool = {
-      nixos_pool = {
+      nixos = {
         type = "zpool";
         options = {
           autotrim = "on";
@@ -48,28 +48,28 @@
           keylocation = "prompt";
         };
         datasets = {
-          faketmpfs_dataset = {
+          faketmpfs = {
             type = "zfs_fs";
             mountpoint = "/";
           };
-          nix_dataset = {
+          nix = {
             type = "zfs_fs";
             mountpoint = "/nix";
           };
-          tmp_dataset = {
+          tmp = {
             type = "zfs_fs";
             mountpoint = "/tmp";
           };
-          persist_dataset = {
+          persist = {
             type = "zfs_fs";
             mountpoint = "/persist";
           };
-          c_dataset = {
+          c = {
             type = "zfs_fs";
             mountpoint = "/mnt/c";
           };
         };
-        postCreateHook = "zfs snapshot nixos_pool/faketmpfs_dataset@blank_dataset";
+        postCreateHook = "zfs snapshot nixos/faketmpfs@blank";
       };
     };
   };
