@@ -36,6 +36,11 @@
       systems = [ "x86_64-linux" ];
       flake = {
         nixosConfigurations = {
+	  exampleIso = nixpkgs.lib.nixosSystem {
+	    modules = [
+	      ./iso/configuration.nix
+	    ];
+	  };
           failbox = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
