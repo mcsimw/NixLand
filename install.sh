@@ -12,7 +12,6 @@ Partition 1:
 	Flags: EF00
 	PartLabel = BOOT
 	Mountpoint = /boot
-
 Partition 2:
 	Size: The rest of the available storage on the disk
 	Filesystem: ZFS
@@ -31,8 +30,6 @@ Partition 2:
 		encryption = aes-256-gcm
 		keyformat = passphrase
 		keylocation = prompt
-
-
 	snapshot : A post create hook will create the blank snapshot faketmpfs@blank
 	nixos datasets:
 		faketmpfs ( mounted at / with the blank snapshot faketmpfs@blank )
@@ -65,7 +62,6 @@ perform_formatting() {
 	case "$hostname" in
 		failbox)
 			echo "Performing action for failbox..."
-			# Add your formatting action for failbox here
 			for ((i = 1; i <= 7; i++)); do
 				echo "Attempt $i: Running wipefs -a on /dev/sda..."
 				wipefs -a /dev/sda
@@ -111,8 +107,11 @@ perform_formatting() {
 
 perform_formatting "$hostname"
 
+
+# Partition operating system disk
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$hostname/disko-config.nix"
 
+# Set correct premissions
 sudo install -o 1000 -g 100 -d /mnt/persist/home/mcsimw && sudo chown -R 1000:100 /mnt/mnt/c
 
 sudo nixos-install --no-root-passwd --flake .#$hostname
