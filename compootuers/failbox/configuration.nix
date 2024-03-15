@@ -16,12 +16,18 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/mcsimw/.config/sops/age/keys.txt";
   };
-  environment.persistence."/persist" = { 
-    hideMounts = true; 
+  environment.persistence."/persist" = {
+    hideMounts = true;
     users.mcsimw = {
       directories = [
-        { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".ssh"; mode = "0700"; }
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
         ".config/sops/age"
       ];
     };
@@ -36,7 +42,7 @@
 
   programs.nixvim = {
     enable = true;
-    extraPlugins = [ pkgs.vimPlugins.modus-themes-nvim];
+    extraPlugins = [ pkgs.vimPlugins.modus-themes-nvim ];
     colorscheme = "modus";
     plugins.treesitter.enable = true;
   };
@@ -47,13 +53,13 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ 
-        "https://nix-community.cachix.org"  # nix-community
+      substituters = [
+        "https://nix-community.cachix.org" # nix-community
         "https://cache.iog.io" # haskell
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" # nix-community
-	"hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" # haskell
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" # haskell
       ];
     };
   };
@@ -76,7 +82,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-  #  font = "Lat2-Terminus16";
+    #  font = "Lat2-Terminus16";
     keyMap = "us";
   };
   users = {
@@ -87,11 +93,10 @@
         isNormalUser = true;
         extraGroups = [ "wheel" ];
         initialPassword = "1";
-	uid = 1000;
+        uid = 1000;
       };
     };
   };
-
 
   xdg.portal = {
     enable = true;

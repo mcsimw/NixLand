@@ -14,9 +14,9 @@
       settings = {
         main = {
           term = "xterm-256color";
-	  font = "Spleen:size=12";
-	};
-	colors = {
+          font = "Spleen:size=12";
+        };
+        colors = {
           background = "000000";
           foreground = "ffffff";
           regular0 = "000000";
@@ -35,7 +35,7 @@
           bright5 = "b6a0ff";
           bright6 = "6ae4b9";
           bright7 = "ffffff";
-	};
+        };
       };
     };
     git = {

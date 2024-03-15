@@ -9,7 +9,7 @@
           partitions = {
             boot = {
               type = "EF00";
-	      label = "BOOT";
+              label = "BOOT";
               size = "1G";
               content = {
                 type = "filesystem";
@@ -18,7 +18,7 @@
               };
             };
             nixos = {
-	      label = "NIXOS";
+              label = "NIXOS";
               size = "100%";
               content = {
                 type = "zfs";

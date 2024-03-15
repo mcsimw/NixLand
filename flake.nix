@@ -36,18 +36,15 @@
       systems = [ "x86_64-linux" ];
       flake = {
         nixosConfigurations = {
-	  exampleIso = nixpkgs.lib.nixosSystem {
-	    modules = [
-	      ./iso/configuration.nix
-	    ];
-	  };
+          exampleIso =
+            nixpkgs.lib.nixosSystem { modules = [ ./iso/configuration.nix ]; };
           failbox = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./compootuers/failbox/configuration.nix
               home-manager.nixosModules.home-manager
               {
-		programs.tmux.enable = true;
+                programs.tmux.enable = true;
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
@@ -57,8 +54,8 @@
                   [ emacs-overlay.overlay neovim-nightly-overlay.overlay ];
               }
               disko.nixosModules.disko
-	      sops-nix.nixosModules.sops
-	      nixvim.nixosModules.nixvim
+              sops-nix.nixosModules.sops
+              nixvim.nixosModules.nixvim
               impermanence.nixosModules.impermanence
               ./compootuers/failbox/disko-config.nix
             ];
