@@ -36,7 +36,7 @@ Partition 2:
 		nix ( mounted at /nix )
 		tmp ( mounted at /tmp )
 		persist ( mounted at /persist )
-		a ( mounted at /mnt/c ) - a persistent dataset that will be used for storing things
+		a ( mounted at /mnt/a ) - a persistent dataset that will be used for storing things
 
 
 
