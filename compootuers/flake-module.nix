@@ -13,13 +13,13 @@ let
     inextricable-universal
     inextricable-usersettings
   ];
-  systemGenisis = args:
+  systemGenesis = args:
     (inputs.nixpkgs.lib.nixosSystem ((builtins.removeAttrs args [ "hostName" ])
       // {
         specialArgs = { inherit inputs; } // args.specialArgs or { };
         modules =
           [ ./${args.hostName} { networking = { inherit (args) hostName; }; } ]
-          ++ inextricable ++ (args.modules or [ ]);
+          ++ systemInextricables ++ (args.modules or [ ]);
       }));
 in {
 
@@ -29,6 +29,7 @@ in {
     };
     failbox = systemGenesis {
       system = "x86_64-linux";
+      hostName = "failbox";
       modules = [
         ./failbox/configuration.nix
         inputs.home-manager.nixosModules.home-manager

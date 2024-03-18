@@ -8,7 +8,7 @@
   services = {
     zfs = {
       trim = {
-        enabled = true;
+        enable = true;
         interval = "daily";
       };
       autoScrub = {
