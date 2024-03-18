@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  inextricable = with inputs.self.nixosModules; [
+  systemInextricables = with inputs.self.nixosModules; [
     inextricable-audio
     inextricable-boot
     inextricable-filesystem
@@ -13,7 +13,7 @@ let
     inextricable-universal
     inextricable-usersettings
   ];
-  genisis = args:
+  systemGenisis = args:
     (inputs.nixpkgs.lib.nixosSystem ((builtins.removeAttrs args [ "hostName" ])
       // {
         specialArgs = { inherit inputs; } // args.specialArgs or { };
@@ -27,7 +27,7 @@ in {
     iso = inputs.nixpkgs.lib.nixosSystem {
       modules = [ ../iso/configuration.nix ];
     };
-    failbox = inputs.nixpkgs.lib.nixosSystem {
+    failbox = systemGenesis {
       system = "x86_64-linux";
       modules = [
         ./failbox/configuration.nix
