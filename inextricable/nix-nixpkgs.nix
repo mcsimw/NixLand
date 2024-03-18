@@ -20,10 +20,10 @@
       auto-allocate-uids = true;
       builders-use-substitutes = true;
       warn-dirty = false;
-      trusted-users = [
-        "@wheel"
-      ];
-      allowed-users = lib.mapAttrsToList (_: u: u.name) (lib.filterAttrs (_: user: user.isNormalUser) config.users.users);
+      #trusted-users = [
+      #  "@wheel"
+      #];
+      #allowed-users = lib.mapAttrsToList (_: u: u.name) (lib.filterAttrs (_: user: user.isNormalUser) config.users.users);
       http-connections = 0;
       max-substitution-jobs = 128;
       substituters = [
