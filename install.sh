@@ -36,7 +36,7 @@ Partition 2:
 		nix ( mounted at /nix )
 		tmp ( mounted at /tmp )
 		persist ( mounted at /persist )
-		c ( mounted at /mnt/c ) - a persistent dataset that will be used for storing things
+		a ( mounted at /mnt/c ) - a persistent dataset that will be used for storing things
 
 
 
@@ -64,7 +64,7 @@ perform_formatting() {
 			echo "Performing action for failbox..."
 			for ((i = 1; i <= 7; i++)); do
 				echo "Attempt $i: Running wipefs -a on /dev/sda..."
-				wipefs -a /dev/sda
+				sudo wipefs -a /dev/sda
 				if [ "$i" -lt 7 ]; then
 					echo "Waiting for 5 seconds before the next attempt..."
 					sleep 5
@@ -112,6 +112,6 @@ perform_formatting "$hostname"
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$hostname/disks/a.nix"
 
 # Set correct premissions
-sudo install -o 1000 -g 100 -d /mnt/persist/home/mcsimw && sudo chown -R 1000:100 /mnt/mnt/c
+sudo install -o 1000 -g 100 -d /mnt/persist/home/mcsimw && sudo chown -R 1000:100 /mnt/mnt/a
 
 sudo nixos-install --no-root-passwd --flake .#$hostname
