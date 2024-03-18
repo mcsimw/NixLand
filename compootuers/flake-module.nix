@@ -1,9 +1,7 @@
 { inputs, ... }:
 
 let
-  commonProfiles = with inputs.self.nixosModules; [
-    profiles-nix-nixpkgs
-  ];
+  commonProfiles = with inputs.self.nixosModules; [ profiles-nix-nixpkgs ];
 
   commonHome = [
     inputs.home-manager.nixosModule

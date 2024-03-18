@@ -45,6 +45,10 @@
     extraPlugins = [ pkgs.vimPlugins.modus-themes-nvim ];
     colorscheme = "modus";
     plugins.treesitter.enable = true;
+    options = {
+      number = true;
+      relativenumber = true;
+    };
   };
 
   zramSwap.enable = true;

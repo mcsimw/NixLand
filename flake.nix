@@ -32,9 +32,6 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      imports = [
-        ./compootuers/flake-module.nix
-	./profiles/flake-module.nix
-      ];
+      imports = [ ./compootuers/flake-module.nix ./profiles/flake-module.nix ];
     };
 }
