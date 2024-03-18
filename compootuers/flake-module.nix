@@ -1,27 +1,26 @@
 { inputs, ... }:
 
 let
-  commonProfiles = with inputs.self.nixosModules; [ profiles-nix-nixpkgs ];
-
-  commonHome = [
-    inputs.home-manager.nixosModule
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        extraSpecialArgs = { inherit inputs; };
-        users.mcsimw = import ../failbox/home.nix;
-      };
-    }
+  inextricable = with inputs.self.nixosModules; [
+    profiles-audio
+    profiles-boot
+    profiles-filesystem
+    profiles-lang
+    profiles-networking
+    profiles-nix-nixpkgs
+    profiles-security
+    profiles-time
+    profiles-universal
+    profiles-usersettings
   ];
-  nixosSystemWithDefaults = args:
+  genisis = args:
     (inputs.nixpkgs.lib.nixosSystem ((builtins.removeAttrs args [ "hostName" ])
       // {
         specialArgs = { inherit inputs; } // args.specialArgs or { };
         modules =
           [ ./${args.hostName} { networking = { inherit (args) hostName; }; } ]
-          ++ commonProfiles ++ (args.modules or [ ]);
+          ++ inextricable ++ (args.modules or [ ]);
       }));
-
 in {
 
   flake.nixosConfigurations = {

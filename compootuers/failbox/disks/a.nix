@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   disko.devices = {
     disk = {
@@ -74,6 +75,26 @@
         };
         postCreateHook = "zfs snapshot nixos/faketmpfs@blank";
       };
+    };
+  };
+  fileSystems = {
+    "/".neededForBoot = true;
+    "/mnt/c".neededForBoot = true;
+    "/persist".neededForBoot = true;
+  };
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback root filesystem to a pristine state on boot";
+    wantedBy = [
+      "initrd.target"
+    ];
+    after = [ "zfs-import-nixos.service" ];
+    before = [ "sysroot.mount" ];
+    path = with pkgs; [ zfs ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      zfs rollback -r nixos/faketmpfs@blank && echo "  >> >> rollback complete << <<"
+    '';
     };
   };
 }
