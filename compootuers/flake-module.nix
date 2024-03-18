@@ -49,7 +49,7 @@ in {
         inputs.sops-nix.nixosModules.sops
         inputs.nixvim.nixosModules.nixvim
         inputs.impermanence.nixosModules.impermanence
-        ./failbox/disko-config.nix
+        ./failbox/disks/a.nix
       ];
     };
   };

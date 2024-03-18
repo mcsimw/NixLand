@@ -109,7 +109,7 @@ perform_formatting "$hostname"
 
 
 # Partition operating system disk
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$hostname/disko-config.nix"
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./compootuers/$hostname/disks/a.nix"
 
 # Set correct premissions
 sudo install -o 1000 -g 100 -d /mnt/persist/home/mcsimw && sudo chown -R 1000:100 /mnt/mnt/c

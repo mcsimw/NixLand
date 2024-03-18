@@ -33,7 +33,7 @@
       nixos = {
         type = "zpool";
         options = {
-          autotrim = "on";
+          autotrim = "off";
           ashift = "12";
         };
         rootFsOptions = {
@@ -43,9 +43,12 @@
           xattr = "sa";
           normalization = "formD";
           mountpoint = "none";
+          canmount = "off";
           encryption = "aes-256-gcm";
           keyformat = "passphrase";
           keylocation = "prompt";
+          sync = "disabled";
+          dnodesize = "auto";
         };
         datasets = {
           faketmpfs = {
@@ -64,9 +67,9 @@
             type = "zfs_fs";
             mountpoint = "/persist";
           };
-          c = {
+          a = {
             type = "zfs_fs";
-            mountpoint = "/mnt/c";
+            mountpoint = "/mnt/a";
           };
         };
         postCreateHook = "zfs snapshot nixos/faketmpfs@blank";
